@@ -5,16 +5,14 @@
 
 # Introduction
 Write-Host "Download 7-zip for deployment"
-Write-Host "============================="
+Write-Host "=============================" ; ""
 
 # Ask for admin credentials
-Write-Host "Input administrator credentials"
+Write-Host "Input administrator credentials" ; ""
 $cred = Get-Credential
 
 # Inform re: version number format
-Write-Host "Input version number"
-Write-Host "Format: ####"
-Write-Host "e.g. 1900 for version 19.0.0"
+Write-Host "Input version number" ; "Format: ####" ; "e.g. 1900 for version 19.0.0" ; ""
 
 # Create filename from user input
 $Version = Read-Host -Prompt 'Version:'
@@ -24,17 +22,17 @@ $Ext = '.msi'
 
 $Filename = $Prefix + $Version + $Suffix + $Ext
 
-Write-Host $Filename
+Write-Host $Filename ; ""
 
 # Create download and target variables
 ## Download source
 $DLUri = 'https://www.7-zip.org/a'
 $Source = "$DLUri/$Filename"
-Write-Host "Downloading $Source"
+Write-Host "Downloading $Source" ; ""
 ## Repository/Target
 $Repository = '\\rnas\appstore\7zip'
 $Destination ="$Repository\$Filename"
-Write-Host "Saving $Filename to $Repository"
+Write-Host "Saving $Filename to $Repository" ; ""
 
 # Download to the repository
 Invoke-WebRequest -Uri $Source -OutFile $Destination

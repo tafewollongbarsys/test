@@ -5,19 +5,14 @@
 
 # Introduction
 Write-Host "Download Dropbox for deployment"
-Write-Host "============================="
-Write-Host ""
+Write-Host "=============================" ; ""
 
 # Ask for admin credentials
-Write-Host "Input administrator credentials"
-Write-Host ""
+Write-Host "Input administrator credentials" ; ""
 #$cred = Get-Credential
 
 # Inform re: version number format
-Write-Host "Input version number"
-Write-Host "Format: ###.#.###"
-Write-Host "e.g. 100.2.340"
-Write-Host ""
+Write-Host "Input version number" ; "Format: ###.#.###" ; "e.g. 100.2.340" ; ""
 
 # Create filename from user input
 $Version = Read-Host -Prompt 'Version'
@@ -27,21 +22,18 @@ $Ext = '.exe'
 
 $Filename = $Prefix + $Version + $Suffix + $Ext
 
-Write-Host $Filename
-Write-Host ""
+Write-Host $Filename ; ""
 
 # Create download and target variables
 ## Download source
 $DLFileName =  -join('Dropbox%20',$Version,'%20Offline%20Installer.exe')
 $DLUri = 'https://clientupdates.dropboxstatic.com/dbx-releng/client'
 $Source = "$DLUri/$DLFilename"
-Write-Host "Downloading $Source"
-Write-Host ""
+Write-Host "Downloading $Source" ; ""
 ## Repository/Target
 $Repository = '\\rnas\appstore\Dropbox'
 $Destination ="$Repository\$Filename"
-Write-Host "Saving $Filename to $Repository"
-Write-Host ""
+Write-Host "Saving $Filename to $Repository" ; ""
 
 # Download to the repository
 ## NB: Headers obtained via Chrome Developer Mode
@@ -65,14 +57,12 @@ Invoke-WebRequest -Uri $Source -Headers @{
 $Parms = "/S"
 $Prms = $Parms.Split(" ")
 ## Warning
-Write-Host "Installing $Filename with the following parameters:"
-Write-Host "$Prms"
-Write-Host ""
+Write-Host "Installing $Filename with the following parameters:" ; "$Prms" ; ""
 ## Run
 #& "$Destination" $Prms
 
 # Delete scheduled update tasks
-Write-Host "Deleting scheduled update tasks"
+Write-Host "Deleting scheduled update tasks" ; ""
 ## DropboxUpdateTaskMachineCore
 if ($(Get-ScheduledTask -TaskName "DropboxUpdateTaskMachineCore" -ErrorAction SilentlyContinue).TaskName -eq "DropboxUpdateTaskMachineCore") {
     Unregister-ScheduledTask -TaskName "DropboxUpdateTaskMachineCore" -Confirm:$False
