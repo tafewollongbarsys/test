@@ -23,5 +23,6 @@ Current test project, as at 2020-07-01: **Application and patch downloading and 
 - VirtualBox (app)
 - VirtualBox (extensions)
 - VLC
+- WinSCP
 - VMWare workstation
 - Wireshark
