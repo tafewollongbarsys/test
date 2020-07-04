@@ -17,10 +17,9 @@ Write-Host "Input version number" ; "Format: ##########" ; "e.g. 1234567890" ; "
 # Create filename from user input
 $Version = Read-Host -Prompt 'Version'
 $Prefix = 'AcroRdrDCUpd'
-#$Suffix = ''
 $Ext = '.msp'
 
-$Filename = $Prefix + $Version + $Suffix + $Ext
+$Filename = $Prefix + $Version + $Ext
 
 Write-Host $Filename ; ""
 
@@ -34,6 +33,13 @@ Write-Host "Downloading $Source" ; ""
 $Repository = '\\rnas\appstore\AdobeAcrobatReaderDC'
 $Destination ="$Repository\$Filename"
 Write-Host "Saving $Filename to $Repository" ; ""
+
+# Check if file exists
+$FileExists = Test-Path $Destination
+If ($FileExists -eq $True) {
+Write-Host "A file with the name $Filename already exists in the repository." ; "Please exit the script."
+Pause
+}
 
 # Download to the repository
 ## NB: Headers obtained via Chrome Developer Mode

@@ -34,6 +34,13 @@ $Repository = '\\rnas\appstore\7zip'
 $Destination ="$Repository\$Filename"
 Write-Host "Saving $Filename to $Repository" ; ""
 
+# Check if file exists
+$FileExists = Test-Path $Destination
+If ($FileExists -eq $True) {
+Write-Host "A file with the name $Filename already exists in the repository." ; "Please exit the script." ; ""
+Pause
+}
+
 # Download to the repository
 Invoke-WebRequest -Uri $Source -OutFile $Destination
 

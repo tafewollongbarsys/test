@@ -9,7 +9,7 @@ Write-Host "=============================" ; ""
 
 # Ask for admin credentials
 Write-Host "Input administrator credentials" ; ""
-#$cred = Get-Credential
+$cred = Get-Credential
 
 # Inform re: version number format
 Write-Host "Input version number" ; "Format: ###.#.###" ; "e.g. 100.2.340" ; ""
@@ -34,6 +34,13 @@ Write-Host "Downloading $Source" ; ""
 $Repository = '\\rnas\appstore\Dropbox'
 $Destination ="$Repository\$Filename"
 Write-Host "Saving $Filename to $Repository" ; ""
+
+# Check if file exists
+$FileExists = Test-Path $Destination
+If ($FileExists -eq $True) {
+Write-Host "A file with the name $Filename already exists in the repository." ; "Please exit the script."
+Pause
+}
 
 # Download to the repository
 ## NB: Headers obtained via Chrome Developer Mode
